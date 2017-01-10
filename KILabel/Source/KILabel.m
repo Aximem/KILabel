@@ -29,6 +29,10 @@ NSString * const KILabelLinkTypeKey = @"linkType";
 NSString * const KILabelRangeKey = @"range";
 NSString * const KILabelLinkKey = @"link";
 
+#define userTagColor [UIColor colorWithRed: 249.0/255.0 green: 34.0/255.0 blue: 42.0/255.0 alpha: 1.0]
+#define hashTagColor [UIColor colorWithRed: 61.0/255.0 green: 170.0/255.0 blue: 70.0/255.0 alpha: 1.0]
+#define urlLinkColor [UIColor colorWithRed: 30.0/255.0 green: 111.0/255.0 blue: 230.0/255.0 alpha: 1.0]
+
 #pragma mark - Private Interface
 
 @interface KILabel()
@@ -247,7 +251,13 @@ NSString * const KILabelLinkKey = @"link";
     
     if (!attributes)
     {
-        attributes = @{NSForegroundColorAttributeName : self.tintColor};
+        if (linkType == KILinkTypeUserHandle) {
+            attributes = @{NSForegroundColorAttributeName : userTagColor};
+        }else if (linkType == KILinkTypeHashtag){
+            attributes = @{NSForegroundColorAttributeName : hashTagColor};
+        }else{
+            attributes = @{NSForegroundColorAttributeName : urlLinkColor};
+        }
     }
     
     return attributes;
